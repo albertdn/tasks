@@ -26,7 +26,8 @@ router.get('/tasks/:id', function(req, res, send){
 //Save task
 router.post('/task', function(req, res, next){
     var task = req.body;
-    if(!task.title || (task.isDone + '')){
+    if(!task.title || !(task.isDone + '')){
+        console.log(task);
         res.status(400);
         res.json({
             "error": "Bad Data"
@@ -42,7 +43,7 @@ router.post('/task', function(req, res, next){
 });
 
 //Delete task
-router.delete('/tasks/:id', function(req, res, send){
+router.delete('/task/:id', function(req, res, send){
     db.tasks.remove({_id: mongojs.ObjectId(req.params.id)},function(err, task){
         if(err){
             res.send(err);
@@ -52,7 +53,7 @@ router.delete('/tasks/:id', function(req, res, send){
 });
 
 //Update task
-router.put('/tasks/:id', function(req, res, send){
+router.put('/task/:id', function(req, res, send){
     var task = req.body;
     var updTask ={};
 
@@ -63,7 +64,6 @@ router.put('/tasks/:id', function(req, res, send){
     if(task.title){
         updTask.title = task.title;
     }
-
     if(!updTask){
         res.status(400);
         res.json({

@@ -26,7 +26,8 @@ app.use('/api', tasks);
 
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  // res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'client/src/index.html'));
 });
 app.listen(port, function(){
     console.log("Listening to port "+port);
